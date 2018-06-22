@@ -32,6 +32,7 @@ public class TechnoDacha {
                 Elements Attribute = doc2.getElementsByClass("product__short-specs");
                 Elements Unit = doc2.getElementsByClass("table__name");
                 Elements Value = doc2.getElementsByClass("table__value");
+                Elements Image = doc2.getElementsByClass("slider__image");
 
                 System.out.println();
                 String DesText = Description.select("[itemprop=description]").text();
@@ -45,10 +46,17 @@ public class TechnoDacha {
 
                 }
 
+                int Img=0;
+                for (Element Images: Image){
+                    System.out.print(Image.get(Img).attr("src")+ ";");
+                    Img++;
+                }
+                System.out.println();
 
-
+//data/image/auto/1
                 y = y + 2;
             }
+
 
 
         }
