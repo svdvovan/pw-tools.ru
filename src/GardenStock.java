@@ -7,6 +7,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
 
@@ -25,10 +26,11 @@ public class GardenStock {
             Elements Description = doc2.getElementsByClass("prodcontent");
             Elements NameProduct = doc2.getElementsByClass("content-wrap");
             Elements Price = doc2.getElementsByClass("prise");
-            System.out.println(Description.select("p").text());
+            //Elements Image = doc2.getElementsByClass("vertical-gallery");
+            Elements Image = doc2.getElementsByTag("a");
             System.out.println(NameProduct.select("h1").text());
             System.out.println(Price.text());
-
+            System.out.println(Description.select("p").text());
 
             Elements table = doc2.select("table");
             Elements row = table.select("tr");
@@ -39,8 +41,15 @@ public class GardenStock {
                 System.out.print(ite.next().text() + "|");
                 System.out.println(ite.next().text() + " ");
             }
-
-
+            int Img=0;
+            for (Element Images: Image) {
+                String FileName = Image.get(Img).select("data-lightbox[image-1]").attr("href");
+                File f = new File(FileName);
+                //                System.out.print(Image.get(Img).attr("src")+ ";");
+                System.out.print("data/image/auto/3/" + f.getName() + ",");
+                Img++;
+            }
+            System.out.println();
             y++;
         }
     }
