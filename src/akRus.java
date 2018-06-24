@@ -14,7 +14,7 @@ import java.util.Iterator;
 public class akRus {
     public static void main(String[] args) throws IOException {
         System.setProperty("javax.net.ssl.trustStore", "F:/Projects/PwTools/cert/akrus/akrus.crt.jks");
-        String Path = "https://ak-rus.ru/tehnika-dlya-sada-i-doma/cepnye-pily/pily-benzinovye/";
+        String Path = "https://ak-rus.ru/search/?search=Highline%204";
 
         Document doc1 = Jsoup.connect(Path).get();
         Elements links1 = doc1.getElementsByClass("name");
@@ -49,13 +49,15 @@ public class akRus {
                 System.out.print(ite.next().text() + "|");
                 System.out.println(ite.next().text() + " ");
             }
+
             int Img=0;
             for (Element Images : Image) {
-                String FileName = Image.select("a[href]").attr("abs:href");
+                String FileName = Image.get(Img).select("a[href]").attr("abs:href");
                 File f = new File(FileName);
                 System.out.print("data/image/auto/2/" + f.getName() + ",");
                 Img++;
             }
+
 
   //          String FileName = Image.attr("src");
 //            String FileName = Image.select("a[href]").attr("abs:href");
@@ -64,7 +66,7 @@ public class akRus {
             System.out.println();
             y++;
         }
-      
+
 
     }
 }
