@@ -13,16 +13,18 @@ import java.util.Iterator;
 
 public class akRus {
     public static void main(String[] args) throws IOException {
-        System.setProperty("javax.net.ssl.trustStore", "F:/Projects/PwTools/cert/akrus/akrus.crt.jks");
-        String Path = "https://ak-rus.ru/search/?search=Highline%204";
+      //  System.setProperty("javax.net.ssl.trustStore", "F:/Projects/PwTools/cert/akrus/akrus.crt.jks");
+        //keytool -import -v -file S:/ProjectJava/pw-tools.ru/cert/akrus/akrus.crt -keystore S:/ProjectJava/pw-tools.ru/cert/akrus/akrus.crt.jks -storepass drowssap
+        System.setProperty("javax.net.ssl.trustStore", "S:/ProjectJava/pw-tools.ru/cert/akrus/akrus.crt.jks");
+        String Path = "https://ak-rus.ru/gazonnaya-tehnika/gazonokosilki/benzinovye-gazonokosilki/?limit=100";
 
         Document doc1 = Jsoup.connect(Path).get();
-        Elements links1 = doc1.getElementsByClass("name");
-        Elements Price = doc1.getElementsByClass("price");
-        Elements NameProduct = doc1.getElementsByClass("name");
+        Elements links1 = doc1.getElementsByClass("name").select("h3");
+      //  Elements Price = doc1.getElementsByClass("price");
+   //     Elements NameProduct = doc1.getElementsByClass("name");
 
 
-
+    //    System.out.println(links1);
 
         int y = 0;
         for (Element link1 : links1) {
@@ -31,16 +33,20 @@ public class akRus {
             Document doc2 = Jsoup.connect(addressUrl).get();
 
             Element Description = doc2.getElementsByClass("tab-content").select("p").first();
-    //        Elements Attribute = doc2.getElementsByClass("attribute");
-//            Elements Unit = doc2.getElementsByClass("table__name");
-//            Elements Value = doc2.getElementsByClass("table__value");
             Elements Image = doc2.getElementsByClass("colorbox thumbcols-3");
+            Elements Price = doc2.getElementsByClass("price-new");
+            Elements NameProduct = doc2.getElementsByTag("h1");
+            String SuperImage = doc2.getElementsByClass("image").select("a[href]").attr("abs:href");
+
+            File d = new File(SuperImage);
+
 
             System.out.println();
-            System.out.println(NameProduct.get(y).text() + " \n" +Price.get(y).text() + " \n" + Description.text()) ;
+            System.out.println(NameProduct.text() + " \n" +Price.text() + " \n" + Description.text()) ;
 
             System.out.println();
-            Element table = doc2.select("table").get(1);
+         //   Element table = doc2.select("table").get(1);
+            Element table = doc2.getElementsByTag ("table").get(3);
             Elements row = table.select("tr");
             Iterator<Element> ite = table.select("td").iterator();
 
@@ -49,7 +55,7 @@ public class akRus {
                 System.out.print(ite.next().text() + "|");
                 System.out.println(ite.next().text() + " ");
             }
-
+            System.out.print("data/image/auto/2/" + d.getName() + ",");
             int Img=0;
             for (Element Images : Image) {
                 String FileName = Image.get(Img).select("a[href]").attr("abs:href");
