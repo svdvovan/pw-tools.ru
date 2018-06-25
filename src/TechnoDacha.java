@@ -16,8 +16,10 @@ import java.nio.file.Paths;
     //keytool -import -v -file F:/Projects/PwTools/cert/technodacha/technodacha.crt -keystore F:/Projects/PwTools/cert/technodacha/technodacha.crt.jks -storepass drowssap
 public class TechnoDacha {
     public static void main(String[] args) throws IOException {
-        System.setProperty("javax.net.ssl.trustStore", "F:/Projects/PwTools/cert/technodacha/technodacha.crt.jks");
-        String Path = "https://www.technodacha.ru/catalog/sadovaya_tekhnika_1/gazonokosilki/filter/brand_ref-is-yii000004/apply/?utm_medium=cpc&utm_source=yandex&utm_campaign=1jam_gazonokosilki-celevye-poisk-Msk%7C34897899&utm_term=%D0%B3%D0%B0%D0%B7%D0%BE%D0%BD%D0%BE%D0%BA%D0%BE%D1%81%D0%B8%D0%BB%D0%BA%D0%B0+%D0%B0%D0%BB%D0%BA%D0%BE&utm_content=13363561615_%7Ccid%7C34897899%7Cgid%7C3345001475%7Caid%7C5782457529%7Cadp%7Cno%7Cpos%7Cother1%7Csrc%7Csearch_none%7Cdvc%7Cdesktop%7Cdop_0&_openstat=ZGlyZWN0LnlhbmRleC5ydTszNDg5Nzg5OTs1NzgyNDU3NTI5O3lhbmRleC5ydTpndWFyYW50ZWU&yclid=3522832024675819584&PAGEN_1=2";
+       // System.setProperty("javax.net.ssl.trustStore", "F:/Projects/PwTools/cert/technodacha/technodacha.crt.jks");
+        System.setProperty("javax.net.ssl.trustStore", "S:/ProjectJava/pw-tools.ru/cert/technodacha/technodacha.crt.jks");
+        String Path = "https://www.technodacha.ru/catalog/silovaya_produktsiya/generatory_i_elektrostantsii/filter/brand_ref-is-yii000018/apply/";
+
 
             Document doc1 = Jsoup.connect(Path).get();
             Elements links1 = doc1.getElementsByClass("snippet__image-wrapper");
