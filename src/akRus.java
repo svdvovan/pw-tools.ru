@@ -16,7 +16,7 @@ public class akRus {
       //  System.setProperty("javax.net.ssl.trustStore", "F:/Projects/PwTools/cert/akrus/akrus.crt.jks");
         //keytool -import -v -file S:/ProjectJava/pw-tools.ru/cert/akrus/akrus.crt -keystore S:/ProjectJava/pw-tools.ru/cert/akrus/akrus.crt.jks -storepass drowssap
         System.setProperty("javax.net.ssl.trustStore", "S:/ProjectJava/pw-tools.ru/cert/akrus/akrus.crt.jks");
-        String Path = "https://ak-rus.ru/gazonnaya-tehnika/gazonokosilki/benzinovye-gazonokosilki/?limit=100";
+        String Path = "https://ak-rus.ru/search/?search=4705%20E";
 
         Document doc1 = Jsoup.connect(Path).get();
         Elements links1 = doc1.getElementsByClass("name").select("h3");
@@ -46,7 +46,7 @@ public class akRus {
 
             System.out.println();
          //   Element table = doc2.select("table").get(1);
-            Element table = doc2.getElementsByTag ("table").get(3);
+            Element table = doc2.getElementsByTag ("table").get(1);
             Elements row = table.select("tr");
             Iterator<Element> ite = table.select("td").iterator();
 
@@ -60,7 +60,7 @@ public class akRus {
             for (Element Images : Image) {
                 String FileName = Image.get(Img).select("a[href]").attr("abs:href");
                 File f = new File(FileName);
-                System.out.print("data/image/auto/2/" + f.getName() + ",");
+                System.out.print("data/image/auto/4/" + f.getName() + ",");
                 Img++;
             }
 
